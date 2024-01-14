@@ -20,6 +20,12 @@ class GenelController extends Controller
         $this->genelService = $genelService;
     }
   
+    public function il()
+    {   
+          $iller = $this->genelService->il();
+          return response()->json($iller);
+    }
+
     public function ilce(Request $request)
     {   
           $ilId = $request->query('il_id');
@@ -88,6 +94,7 @@ class GenelController extends Controller
 
     public function aracSearch(Request $request)
     {
+      
       $mrmdl = $request->query('mrmdl');
       $yakit = $request->query('yakit');
       $vites = $request->query('vites');
@@ -181,6 +188,7 @@ class GenelController extends Controller
             }
             $araclar[]=$arac;
       }
+      
       return response()->json($araclar);
     }
 

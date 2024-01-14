@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class AracController extends Controller
 {
-    public function aracim()
+    public function aracim(Request $request)
     {
         $aracVerileri = DB::select(DB::raw("
         SELECT a.*, m.mr_isim AS marka_name, mo.m_name AS model_name,
@@ -24,6 +24,8 @@ class AracController extends Controller
         LEFT JOIN arac_ofis ao on ao.ofis_id=a.ofis_id
         LEFT JOIN ilce on ilce.ilce_id=ao.ilce_id
         LEFT JOIN il on il.il_id=ilce.il_id
+ 
+       
         "));
         return view('fiyat-listesi', compact('aracVerileri'));
     }

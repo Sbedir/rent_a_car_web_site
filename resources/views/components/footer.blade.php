@@ -1,5 +1,5 @@
 
-
+@inject('ts', 'App\Services\TranslateService')
   <div class="footbar">
         <div class="container-fluid xtop">
             <div class="container">
@@ -7,29 +7,29 @@
                     <div class="col-md-3 fooiconed">
                         <p>
                             <span class="glyphicon glyphicon-road"></span>
-                            <strong>ARAÇ FİLOSU</strong>
-                            En uygun fiyatlarla en kaliteli araç kiralama hizmeti!
+                            <strong>{{$ts->t("ARAÇ FİLOSU")}}</strong>
+                            {{$ts->t("En uygun fiyatlarla en kaliteli araç kiralama hizmeti")}}!
                         </p>
                     </div>
                     <div class="col-md-3 fooiconed">
                         <p>
                             <span class="glyphicon glyphicon-user"></span>
-                            <strong>ÜYELİK İŞLEMLERİ</strong>
-                            Hemen ücretsiz üye olun, rezervasyon takibini kolayca yapın!
+                            <strong>{{$ts->t("ÜYELİK İŞLEMLERİ")}}</strong>
+                            {{$ts->t("Hemen ücretsiz üye olun, rezervasyon takibini kolayca yapın")}}!
                         </p>
                     </div>
                     <div class="col-md-3 fooiconed">
                         <p>
                             <span class="glyphicon glyphicon-fire"></span>
-                            <strong>EKSTRA SEÇENEKLER</strong>
-                            Rezervasyonun ekstraları ile sürüşünüzü kolay ve güvenli yapın!
+                            <strong>{{$ts->t("EKSTRA SEÇENEKLER")}}</strong>
+                            {{$ts->t("Rezervasyonun ekstraları ile sürüşünüzü kolay ve güvenli yapın")}}!
                         </p>
                     </div>
                     <div class="col-md-3 fooiconed">
                         <p>
                             <span class="glyphicon glyphicon-map-marker"></span>
-                            <strong>BİZE ULAŞIN</strong>
-                            Her türlü soru ve sorununuz için bize hemen ulaşabilirsiniz!
+                            <strong>{{$ts->t("BİZE ULAŞIN")}}</strong>
+                            {{$ts->t("Her türlü soru ve sorununuz için bize hemen ulaşabilirsiniz")}}!
                         </p>
                     </div>
                 </div>
@@ -40,33 +40,33 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-4">
-                            <h3 class="footitle">Rezervasyon İşlemleri</h3>
+                            <h3 class="footitle">{{$ts->t("Rezervasyon İşlemleri")}}</h3>
 
-                            <a href="https://tema13.otokiralamascripti.net/fiyat-listesi" class="foota fylist">Araç
-                                Kirala</a>
-                            <a href="https://tema13.otokiralamascripti.net/sorgulama" class="foota">Rezervasyon
-                                Sorgula</a>
-                            <a href="https://tema13.otokiralamascripti.net/uye-panel" class="foota">Geçmiş
-                                Rezervasyonlarım</a>
-                            <a href="https://tema13.otokiralamascripti.net/transfer" class="foota">Transfer
-                                Rezervasyonu</a>
-                            <a href="https://tema13.otokiralamascripti.net/uye-giris" class="foota">Üye Giriş/Kayıt</a>
+                            <a href="https://tema13.otokiralamascripti.net/fiyat-listesi" class="foota fylist">
+                                {{$ts->t("Araç Kirala")}}</a>
+                            <a href="https://tema13.otokiralamascripti.net/sorgulama" class="foota">
+                                {{$ts->t("Rezervasyon Sorgula")}}</a>
+                            <a href="https://tema13.otokiralamascripti.net/uye-panel" class="foota">
+                                {{$ts->t("Geçmiş Rezervasyonlarım")}}</a>
+                            <a href="https://tema13.otokiralamascripti.net/transfer" class="foota">
+                                {{$ts->t("Transfer Rezervasyonu")}}</a>
+                            <a href="https://tema13.otokiralamascripti.net/uye-giris" class="foota">{{$ts->t("Üye Giriş/Kayıt")}}</a>
                         </div>
                         <div class="col-md-4">
-                            <h3 class="footitle">Hakkımızda</h3>
+                            <h3 class="footitle">{{$ts->t("Hakkımızda")}}</h3>
                             <a href="https://tema13.otokiralamascripti.net/sayfa/5-hakkimizda"
-                                class="foota">Hakkımızda</a>
+                                class="foota">{{$ts->t("Hakkımızda")}}</a>
                             <a href="https://tema13.otokiralamascripti.net/sayfa/6-kiralama-kosullari"
-                                class="foota">Kiralama Koşulları</a>
-                            <a href="https://tema13.otokiralamascripti.net/sayfa/7-filo-kiralama" class="foota">Filo
-                                Kiralama</a>
-                            <a href="https://tema13.otokiralamascripti.net/sayfa/8-s.s.s." class="foota">S.S.S.</a>
-                            <a href="https://tema13.otokiralamascripti.net/haberler" class="foota">Haber &amp;
-                                Duyurular</a>
-                            <a href="https://tema13.otokiralamascripti.net/iletisim" class="foota">Bize Ulaşın</a>
+                                class="foota">{{$ts->t("Kiralama Koşulları")}}</a>
+                            <a href="https://tema13.otokiralamascripti.net/sayfa/7-filo-kiralama" class="foota">
+                                {{$ts->t("Filo Kiralama")}}</a>
+                            <a href="https://tema13.otokiralamascripti.net/sayfa/8-s.s.s." class="foota">{{$ts->t("S.S.S.")}}</a>
+                            <a href="https://tema13.otokiralamascripti.net/haberler" class="foota">{{$ts->t("Haber")}} &amp;
+                                {{$ts->t("Duyurular")}}</a>
+                            <a href="https://tema13.otokiralamascripti.net/iletisim" class="foota">{{$ts->t("Bize Ulaşın")}}</a>
                         </div>
                         <div class="col-md-4">
-                            <h3 class="footitle">Sosyal Medya</h3>
+                            <h3 class="footitle">{{$ts->t("Sosyal Medya")}}</h3>
 
                             <div class="socialsfoot">
                                 <a href="http://www.facebook.com" target="_blank" class="facebook">&nbsp;</a>
@@ -75,7 +75,7 @@
                                 <a href="http://www.plussoc.com" target="_blank" class="googleplus">&nbsp;</a>
 
                                 <p class="foodestek">
-                                    <strong>Rezervasyon Hattı</strong>
+                                    <strong>{{$ts->t("Rezervasyon Hattı")}}</strong>
                                     <span><a href="tel:+905443240060" target="_blank">0 544 324 00 60</a></span>
                                 </p>
                             </div>
@@ -87,8 +87,8 @@
       </div>
 
     <div class="fooaltbar">
-        https://tema13.otokiralamascripti.net/ &copy; 2023 - Tüm Hakları Saklıdır - <label><a
-                href="http://www.otokiralamascripti.net" target="_blank">Oto Kiralama Scripti</a></label>
+        https://tema13.otokiralamascripti.net/ &copy; 2023 -  {{$ts->t("Tüm Hakları Saklıdır")}}- <label><a
+                href="http://www.otokiralamascripti.net" target="_blank">{{$ts->t("Oto Kiralama Scripti")}}</a></label>
     </div>
 
     <script type="text/javascript" src="{{asset('assets/js/system.js')}}"></script>

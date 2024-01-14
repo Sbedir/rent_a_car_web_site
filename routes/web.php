@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/genel/model', 'App\Http\Controllers\GenelController@model');
+Route::get('/genel/il', 'App\Http\Controllers\GenelController@il');
 Route::get('/genel/ilce', 'App\Http\Controllers\GenelController@ilce');
 Route::get('/genel/ofis', 'App\Http\Controllers\GenelController@ofis');
 Route::get('/genel/kiralama-ucret-hesap', 'App\Http\Controllers\GenelController@kiralamaucrethesap');
@@ -29,6 +30,7 @@ Route::get('/sss', 'App\Http\Controllers\SayfaController@sss');
 Route::get('/iletisim', 'App\Http\Controllers\SayfailetisimController@sayfailetisim');
 Route::get('/transfer', 'App\Http\Controllers\TransferController@transferhizmet');
 Route::get('/fiyat-listesi', 'App\Http\Controllers\AracController@aracim');
+Route::post('/fiyat-listesi', 'App\Http\Controllers\AracController@aracim')->name('fiyat.listesi');
 Route::get('/anasayfa', 'App\Http\Controllers\AnasayfaController@anasayfabilgi');
 Route::get('/haber/{unique_name}', 'App\Http\Controllers\AnasayfaController@haber');
 
@@ -53,6 +55,14 @@ Route::post('/uye-panel/sifre-degistir', 'App\Http\Controllers\UyeController@uye
  Route::get('/uye-panel/sifre-degistir', function () {
     return view('sifre-degistir');
  });
+
+ Route::post('/fiyat-listesi/kirala', 'App\Http\Controllers\FiyatlistesiController@submitForm')->name("kiralik.arac");
+ Route::post('/fiyat-listesi/onayla', 'App\Http\Controllers\FiyatlistesiController@submitFormOnayla')->name("kiralik.arac.onayla");
+
+ Route::get('/para-birimi/{parabirimi}', 'App\Http\Controllers\FiyatlistesiController@parabirimsec');
+ Route::get('/dil-sec/{dil}', 'App\Http\Controllers\FiyatlistesiController@dilsec');
+//   Route::get('/fiyat-listesi/kirala', function () {
+//     return view('fiyat-listesi2');  });
 
 
  Route::get('/uye-panel/cikis-yap', 'App\Http\Controllers\GenelController@logout');

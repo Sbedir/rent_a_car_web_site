@@ -1,26 +1,27 @@
 @extends('layout')
 @section('icerik')
+@inject('ts', 'App\Services\TranslateService')
 
 <div class="container firstclear marbot">
     <div class="row">
         <div class="col-md-6">
-            <h1 class="bigtitle"><strong>Bize Ulaşın</strong></h1>
+            <h1 class="bigtitle"><strong>{{$ts->t("Bize Ulaşın")}}</strong></h1>
 
             <p class="context">
-                <span class="glyphicon glyphicon-map-marker"></span> <strong>Adres:</strong>
+                <span class="glyphicon glyphicon-map-marker"></span> <strong>{{$ts->t("Adres")}}:</strong>
                 {{$SayfailetisimVerileri->adres}}
             </p>
 
-            <p class="context"><span class="glyphicon glyphicon-earphone"></span> <strong>Telefon:</strong>
+            <p class="context"><span class="glyphicon glyphicon-earphone"></span> <strong>{{$ts->t("Telefon")}}:</strong>
                 {{$SayfailetisimVerileri->tel}} </p>
             <p class="context">
-                <span class="glyphicon glyphicon-envelope"></span> <strong>E-posta:</strong>
+                <span class="glyphicon glyphicon-envelope"></span> <strong>{{$ts->t("E-posta")}}:</strong>
                 {{$SayfailetisimVerileri->e_posta}}
             </p>
 
         </div>
         <div class="col-md-6">
-            <h1 class="bigtitle"><strong>Mesaj Gönderin</strong></h1>
+            <h1 class="bigtitle"><strong>{{$ts->t("Mesaj Gönderin")}}</strong></h1>
             @if (Session::has('success'))
             <div class="alert alert-success">
                 {{ Session::get('success') }}
@@ -37,25 +38,25 @@
                 <!-- Cross-Site Request Forgery (CSRF) koruması -->
                 <input name="ilet_id" id='ilet_id' type="hidden" class="form-control form-control-default">
                 <input type="text" class="form-control" id="ad_soyad" name="ad_soyad" required=""
-                    placeholder="Ad Soyad..." />
+                    placeholder="{{$ts->t('Ad Soyad')}}..." />
 
                 <br />
                 <input type="text" class="form-control" id="e_posta" name="e_posta" required=""
-                    placeholder="E-posta Adresi..." />
+                    placeholder="{{$ts->t('E-posta Adresi')}}..." />
 
                 <br />
-                <input type="text" class="form-control" id="konu" name="konu" required="" placeholder="Konu..."
+                <input type="text" class="form-control" id="konu" name="konu" required="" placeholder="{{$ts->t('Konu')}}..."
                     value="" />
 
                 <br />
-                <textarea class="form-control" id="mesaj" name="mesaj" required="" placeholder="Mesaj..."></textarea>
+                <textarea class="form-control" id="mesaj" name="mesaj" required="" placeholder="{{$ts->t('Mesaj')}}..."></textarea>
 
                 <br />
                 <table cellpadding="0" cellpadding="0" border="0">
                     <tr>
                         <td>
                             <input type="text" class="form-control" name="capt" required=""
-                                placeholder="Güvenlik kodu..." />
+                                placeholder="{{$ts->t('Güvenlik kodu')}}..." />
                         </td>
                         <td style="padding-left: 15px;">
                             <img src="captcha.php" alt="CAPTCHA" id="capim" style="border-radius:8px;" />

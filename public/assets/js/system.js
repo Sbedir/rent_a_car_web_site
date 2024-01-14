@@ -181,50 +181,88 @@ $(document).ready(function() {
         filter_show();
     });
     
-    $(".extra").find(".extcheck").find("input[type=checkbox]").change(function() {
-        var thisobj = $(this).parent();
-        setTimeout(function(){
-            var toplamgun = $("#gunsayisi").html();
-            var thistype = $(thisobj).attr("data-type");
-            var thisfiyat = $(thisobj).attr("data-fiyat");
-            if(thistype==1) { thisfiyat = parseFloat(thisfiyat)*toplamgun; }
-            if(thistype==3) { thisfiyat = 0; }
-            var totalready = $(".total").find("label").find("span").eq(0).html();
-            totalready = totalready.replace(",", "");
+    // $(".extra").find(".extcheck").find("input[type=checkbox]").change(function() {
+    //     var thisobj = $(this).parent();
+    //     setTimeout(function(){
+    //         var toplamgun = $("#gunsayisi").html();
+    //         var thistype = $(thisobj).attr("data-type");
+    //         var thisfiyat = $(thisobj).attr("data-fiyat");
+    //         if(thistype==1) { thisfiyat = parseFloat(thisfiyat)*toplamgun; }
+    //         if(thistype==3) { thisfiyat = 0; }
+    //         var totalready = $(".total").find("label").find("span").eq(0).html();
+    //         totalready = totalready.replace(",", "");
             
-            var thischked = $(thisobj).find("input[type=checkbox]").eq(0).prop("checked");
-            if(thischked)
-            {
-                var newfiyat = parseFloat(totalready)+parseFloat(thisfiyat);
-            } else {
-                var newfiyat = parseFloat(totalready)-parseFloat(thisfiyat);
-            }
+    //         var thischked = $(thisobj).find("input[type=checkbox]").eq(0).prop("checked");
+    //         if(thischked)
+    //         {
+    //             var newfiyat = parseFloat(totalready)+parseFloat(thisfiyat);
+    //         } else {
+    //             var newfiyat = parseFloat(totalready)-parseFloat(thisfiyat);
+    //         }
             
-            $(".total").find("label").find("span").eq(0).html(newfiyat);
-            var strfiyat = $(".total").find("label").find("span").eq(0).html();
-            if(strfiyat.indexOf(".")<=-1) { strfiyat = strfiyat+".00"; }
-            var strexp = strfiyat.split(".");
-            var totfy = strexp[0];
-            var kusurat = strexp[1];
-            if(kusurat.length==1) { kusurat = kusurat+"0"; }
-            if(kusurat.length>2) { kusurat = kusurat.substr(0, 2); }
-            strfiyat = totfy+"."+kusurat;
+    //         $(".total").find("label").find("span").eq(0).html(newfiyat);
+    //         var strfiyat = $(".total").find("label").find("span").eq(0).html();
+    //         if(strfiyat.indexOf(".")<=-1) { strfiyat = strfiyat+".00"; }
+    //         var strexp = strfiyat.split(".");
+    //         var totfy = strexp[0];
+    //         var kusurat = strexp[1];
+    //         if(kusurat.length==1) { kusurat = kusurat+"0"; }
+    //         if(kusurat.length>2) { kusurat = kusurat.substr(0, 2); }
+    //         strfiyat = totfy+"."+kusurat;
             
-            $(".total").find("label").find("span").eq(0).html(strfiyat);
-        }, 250);
-    });
+    //         $(".total").find("label").find("span").eq(0).html(strfiyat);
+    //     }, 250);
+    // });
     
     //$(".phone").mask("(999) 999 99 99");
     
-    setalisdefaulthtml();
-    setdonusdefaulthtml();
+    // setalisdefaulthtml();
+    // setdonusdefaulthtml();
     
+  
     $("#setalistext").click(function(){
         $("#open1").css("display", "");
+        fetch('genel/il', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            $('#open1').html('');
+            $('#open1').append('<a href="javascript:void(0);" onclick="showkonum(0)"><span class="glyphicon glyphicon-chevron-right">&nbsp;</span>Seçiniz</a>');
+            data.forEach(x=>{
+                $('#open1').append('<a href="javascript:void(0);" onclick="showkonum('+x.il_id+')"><span class="glyphicon glyphicon-chevron-right">&nbsp;</span>'+x.il_name+'</a>');
+           })
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     });
+
     
     $("#setdonustext").click(function(){
         $("#open2").css("display", "");
+        fetch('genel/il', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            $('#open2').html('');
+            $('#open2').append('<a href="javascript:void(0);" onclick="showkonum2(0)"><span class="glyphicon glyphicon-chevron-right">&nbsp;</span>Seçiniz</a>');
+            data.forEach(x=>{
+                $('#open2').append('<a href="javascript:void(0);" onclick="showkonum2('+x.il_id+')"><span class="glyphicon glyphicon-chevron-right">&nbsp;</span>'+x.il_name+'</a>');
+           })
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     });
     
     $(".menua.fylist,.foota.fylist").click(function(event){
@@ -267,78 +305,78 @@ function filter_show()
     });
 }
 
-function rezformsb(o, e)
-{
-    e.preventDefault();
+// function rezformsb(o, e)
+// {
+//     e.preventDefault();
     
-    var alisloc = $("input[name=alisloc]").val();
-    var donusloc = $("input[name=donusloc]").val();
-    var alistarih = $("input[name=alistarih]").val();
-    var donustarih = $("input[name=donustarih]").val();
+//     var alisloc = $("input[name=alisloc]").val();
+//     var donusloc = $("input[name=donusloc]").val();
+//     var alistarih = $("input[name=alistarih]").val();
+//     var donustarih = $("input[name=donustarih]").val();
     
-    if(alisloc>0&&donusloc>0&&alistarih!=""&&donustarih!="")
-    {
-        showloader();
-        $(".rezbig").val(lang_loading);
-        $(".rezbig").attr("disabled", "disabled");
+//     if(alisloc>0&&donusloc>0&&alistarih!=""&&donustarih!="")
+//     {
+//         showloader();
+//         $(".rezbig").val(lang_loading);
+//         $(".rezbig").attr("disabled", "disabled");
         
-        setTimeout(function(){
-            $.post("/emc_ajax.php", {"do":"setrezsettings", "alisloc":alisloc, "donusloc":donusloc, "alistarih":alistarih, "donustarih":donustarih}, function(data){
-                if(data=="ok")
-                {
-                    document.location.href = $(o).attr("action");
-                } else {
-                    alert(lang_operror);
-                }
-            });
-        }, 2500);
-    } else {
-        document.location.href = '/fiyat-listesi';
-    }
-}
+//         setTimeout(function(){
+//             $.post("/emc_ajax.php", {"do":"setrezsettings", "alisloc":alisloc, "donusloc":donusloc, "alistarih":alistarih, "donustarih":donustarih}, function(data){
+//                 if(data=="ok")
+//                 {
+//                     document.location.href = $(o).attr("action");
+//                 } else {
+//                     alert(lang_operror);
+//                 }
+//             });
+//         }, 2500);
+//     } else {
+//         document.location.href = '/fiyat-listesi';
+//     }
+// }
 
-function showkonum(locid)
-{
-    $("#open1").html(lang_loading);
-    setTimeout(function(){
-        $.post("/emc_ajax.php", {"do":"showkonum", "locid":locid}, function(data){
-            $("#open1").html(data);
-        });
-    }, 500);
-}
+// function showkonum(locid)
+// {
+//     $("#open1").html(lang_loading);
+//     setTimeout(function(){
+//         $.post("/emc_ajax.php", {"do":"showkonum", "locid":locid}, function(data){
+//             $("#open1").html(data);
+//         });
+//     }, 500);
+// }
 
-function setalisdefaulthtml()
-{
-    alisdefaulthtml = $("#open1").html();
-}
+// function setalisdefaulthtml()
+// {
+//     alisdefaulthtml = $("#open1").html();
+// }
 
-function setdonusdefaulthtml()
-{
-    donusdefaulthtml = $("#open2").html();
-}
+// function setdonusdefaulthtml()
+// {
+//     donusdefaulthtml = $("#open2").html();
+// }
 
-function showkonumreset()
-{
-    $("#open1").html(alisdefaulthtml);
-    $("#open2").html(donusdefaulthtml);
-}
+// function showkonumreset()
+// {
+//     $("#open1").html(alisdefaulthtml);
+//     $("#open2").html(donusdefaulthtml);
+// }
 
-function selectkonum(id, txt)
-{
-    $("#open1").css("display", "none");
-    showkonumreset();
+// function selectkonum(id, txt)
+// {
+//     $("#open1").css("display", "none");
+//     showkonumreset();
     
-    $("#setalisloc").val(id);
-    $("#setalistext").val(txt);
+//     $("#setalisloc").val(id);
+//     $("#setalistext").val(txt);
     
-    $("#setdonusloc").val(id);
-    $("#setdonustext").val(txt);
+//     $("#setdonusloc").val(id);
+//     $("#setdonustext").val(txt);
     
-    if(document.getElementById('spectarihselector'))
-    {
-        $("#rzfrm").submit();
-    }
-}
+//     if(document.getElementById('spectarihselector'))
+//     {
+//         $("#rzfrm").submit();
+//     }
+// }
 
 function showkonumdonus(locid)
 {

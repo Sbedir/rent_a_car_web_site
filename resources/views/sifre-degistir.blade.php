@@ -1,9 +1,10 @@
 @extends('layout')
  @section('icerik')
+ @inject('ts', 'App\Services\TranslateService')
 
             
                 <div class="col-md-9">
-                                <h1 class="bigtitle"><strong>Şifre Değiştir</strong></h1>
+                                <h1 class="bigtitle"><strong>{{$ts->t("Şifre Değiştir")}}</strong></h1>
                                 @if (Session::has('success'))
                 <div class="alert alert-success">
                     {{ Session::get('success') }}
@@ -19,7 +20,7 @@
                               @csrf                   
                         <div class="sozlesmebox rounded bordered nobg">
                          <div class="form-group">
-                            <strong>Şuanki Şifre</strong>
+                            <strong>{{$ts->t("Şuanki Şifre")}}</strong>
                             <div class="input-group">
                                 <div class="input-group-addon">
                                     <span class="glyphicon glyphicon-lock"></span>
@@ -30,7 +31,7 @@
                         </div>
                     
                         <div class="form-group">
-                            <strong>Yeni Şifre</strong>
+                            <strong>{{$ts->t("Yeni Şifre")}}</strong>
                             <div class="input-group">
                                 <div class="input-group-addon">
                                     <span class="glyphicon glyphicon-lock"></span>
@@ -41,7 +42,7 @@
                         </div>
                         
                         <div class="form-group">
-                            <strong>Yeni Şifre Tekrarı</strong>
+                            <strong>{{$ts->t("Yeni Şifre Tekrarı")}}</strong>
                             <div class="input-group">
                                 <div class="input-group-addon">
                                     <span class="glyphicon glyphicon-lock"></span>

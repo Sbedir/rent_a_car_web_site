@@ -1,5 +1,6 @@
 @extends('layout')
 @section('icerik')
+@inject('ts', 'App\Services\TranslateService')
 <div class="container firstclear marbot">
     <div class="row"> 
          @if (Session::has('success'))
@@ -14,7 +15,7 @@
                 </div>
                 @endif
         <div class="col-md-6">
-            <h1 class="bigtitle"><strong>Üye Girişi</strong></h1>
+            <h1 class="bigtitle"><strong>{{$ts->t("Üye Girişi")}}</strong></h1>
 
             <form method="POST" action="{{ route('genel.login') }}" enctype="multipart/form-data">
                 @csrf
@@ -22,18 +23,18 @@
                 <!-- Cross-Site Request Forgery (CSRF) koruması -->
                 <div class="sozlesmebox rounded bordered nobg">
                     <div class="form-group">
-                        <strong>E-posta Adresi</strong>
+                        <strong>{{$ts->t("E-posta Adresi")}}</strong>
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-envelope"></span>
                             </div>
-                            <input class="form-control half" name="e_posta" type="text" placeholder="E-posta Adresi..."
+                            <input class="form-control half" name="e_posta" type="text" placeholder="{{$ts->t('E-posta Adresi')}}..."
                                 required="" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <strong>Şifre</strong>
+                        <strong>{{$ts->t("Şifre")}}</strong>
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-lock"></span>
@@ -51,18 +52,18 @@
 
 
             <br />
-            <h1 class="bigtitle"><strong>Şifremi Unuttum</strong></h1>
+            <h1 class="bigtitle"><strong>{{$ts->t("Şifremi Unuttum")}}</strong></h1>
 
             <form method="post" target="_self" enctype="application/x-www-form-urlencoded">
                 <div class="sozlesmebox rounded bordered nobg">
                     <div class="form-group">
-                        <strong>E-posta Adresi</strong>
+                        <strong>{{$ts->t("E-posta Adresi")}}</strong>
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-envelope"></span>
                             </div>
 
-                            <input class="form-control half" name="email" type="text" placeholder="E-posta Adresi..."
+                            <input class="form-control half" name="email" type="text" placeholder="{{$ts->t('E-posta Adresi')}}..."
                                 required="" />
                         </div>
                     </div>
@@ -75,7 +76,7 @@
         </div>
         <div class="col-md-6">
 
-            <h1 class="bigtitle"><strong>Kayıt Olun</strong></h1>
+            <h1 class="bigtitle"><strong>{{$ts->t("Kayıt Olun")}}</strong></h1>
             <form method="POST" action="{{ route('uye.kayit') }}" id="uyeol" enctype="multipart/form-data">
                 @csrf
                 <!-- Cross-Site Request Forgery (CSRF) koruması -->
@@ -83,31 +84,31 @@
 
                 <div class="sozlesmebox rounded bordered nobg">
                     <div class="form-group">
-                        <strong>Adınız</strong>
+                        <strong>{{$ts->t("Adınız")}}</strong>
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-user"></span>
                             </div>
 
                             <input class="form-control half" name="uye_adi" type="text"
-                                placeholder="Adınız / Soyadınız..." required="" />
+                                placeholder="{{$ts->t('Adınız')}}..." required="" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <strong>Soyadınız</strong>
+                        <strong>{{$ts->t("Soyadınız")}}</strong>
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-user"></span>
                             </div>
 
                             <input class="form-control half" name="uye_soyadi" type="text"
-                                placeholder="Adınız / Soyadınız..." required="" />
+                                placeholder="{{$ts->t('Soyadınız')}}..." required="" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <strong>Doğum Tarihiniz</strong>
+                        <strong>{{$ts->t("Doğum Tarihiniz")}}</strong>
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -118,31 +119,31 @@
                     </div>
 
                     <div class="form-group">
-                        <strong>Cep Telefonunuz</strong>
+                        <strong>{{$ts->t("Cep Telefonunuz")}}</strong>
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-earphone"></span>
                             </div>
 
                             <input class="form-control half phone" name="cep_tel" type="number"
-                                placeholder="Cep Telefonunuz..." required="" />
+                                placeholder="{{$ts->t('Cep Telefonunuz')}}..." required="" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <strong>E-posta Adresiniz</strong>
+                        <strong>{{$ts->t("E-posta Adresiniz")}}</strong>
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-envelope"></span>
                             </div>
 
                             <input class="form-control half" name="e_posta" type="text"
-                                placeholder="E-posta Adresiniz..." required="" />
+                                placeholder="{{$ts->t('E-posta Adresiniz')}}..." required="" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <strong>Şifre Girin</strong>
+                        <strong>{{$ts->t("Şifre Girin")}}</strong>
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-lock"></span>
@@ -154,7 +155,7 @@
                     </div>
 
                     <div class="form-group">
-                        <strong>Şifreyi Tekrar Girin</strong>
+                        <strong>{{$ts->t("Şifreyi Tekrar Girin")}}</strong>
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-lock"></span>

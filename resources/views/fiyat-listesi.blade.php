@@ -1,7 +1,12 @@
 @extends('layout')
 @section('icerik')
 @inject('genelService', 'App\Services\GenelService')
+@inject('ts', 'App\Services\TranslateService')
 
+
+<form method="POST"  enctype="multipart/form-data">
+                @csrf <!-- Cross-Site Request Forgery (CSRF) koruması -->
+       
 <div class="container firstclear rezcizgi ultrahide">
     <div class="row">
         <div class="col-md-4 relat nopad cizgicont">
@@ -34,35 +39,35 @@
 <div class="container martop marbot reztitle">
         <div class="row">
             <div class="col-md-3">
-                <h1 class="reztitlebig">Araç Filosu</h1>
+                <h1 class="reztitlebig">{{$ts->t("Araç Filosu")}}</h1>
             </div>
             <div class="col-md-9 mobhide ultrahide arfil">
                 <input type="text" id="search_mr_mdl" class="form-control arfillow somepad" onkeyup="aracsearch()"  style="width: 124px !important;" placeholder="Marka / Model...">
                 
                 <select class="form-control arfillow" id="search_yakit" onchange="aracsearch()">
-                    <option value="">Yakıt...</option>
+                    <option value="">{{$ts->t("Yakıt")}}...</option>
                    
                     @foreach($genelService->yakitTur() as $key=>$yakitTur)
-                    <option value="{{$key}}">{{$yakitTur}}</option>
+                    <optionvalue="{{$key}}">{{$yakitTur}}</option>
                     @endforeach
                 </select>
                 
                 <select class="form-control arfillow" id="search_vites" onchange="aracsearch()">
-                    <option value="">Vites...</option>
+                    <option value="">{{$ts->t("Vites")}}...</option>
                     @foreach($genelService->vitesTur() as $key=>$vitesTur)
-                    <option value="{{$key}}">{{$vitesTur}}</option>
+                    <optionvalue="{{$key}}">{{$vitesTur}}</option>
                     @endforeach
                 </select>
                 
                 <select class="form-control arfillow" style="width: 144px !important;" id="search_kategori" onchange="aracsearch()">
-                    <option value="">Araç Kategorisi...</option>
+                    <option value="">{{$ts->t("Araç Kategorisi")}}...</option>
                     @foreach($genelService->kategori() as $key=>$kategori)
-                    <option value="{{$key}}">{{$kategori}}</option>
+                    <optionvalue="{{$key}}">{{$kategori}}</option>
                     @endforeach
                 </select>
             </div>
         </div>
-    </div>
+</div>
 
 <div class="container martop marbot">
     <div class="row">
@@ -77,29 +82,30 @@
                     </div>
                     <div class="col-md-5 nopadright">
                         <h1>{{$arac->marka_name}} {{$arac->model_name}}</h1>
-                        <h2>Yolcu Sayısı: <strong>{{$arac->yolcu_kapasite}}</strong> kişiye kadar<br />Bagaj Kapasitesi:
-                            <strong>{{$arac->bagaj_kapasitesi}}</strong> kg kadar
+                        <h2>{{$ts->t("Yolcu Sayısı")}}: <strong>{{$arac->yolcu_kapasite}}</strong>{{$ts->t("kişiye kadar")}} <br />{{$ts->t("Bagaj Kapasitesi")}}:
+                            <strong>{{$arac->bagaj_kapasitesi}}</strong>{{$ts->t("kg kadar")}} 
                         </h2>
 
                         <label class="aracozellik">
-                            <span class="glyphicon glyphicon-scale"></span> <strong>Yakıt:</strong>
+                            <span class="glyphicon glyphicon-scale"></span> <strong>{{$ts->t("Yakıt")}} :</strong>
                             {{$arac->yakit_tur_adi}}
                         </label>
                         <label class="aracozellik">
-                            <span class="glyphicon glyphicon-random"></span> <strong>Vites:</strong>
+                            <span class="glyphicon glyphicon-random"></span> <strong>{{$ts->t("Vites")}} :</strong>
                             {{$arac->vites_tur_name}}
                         </label>
                         <label class="aracozellik">
-                            <span class="glyphicon glyphicon-signal"></span> <strong>Klima:</strong>
+                            <span class="glyphicon glyphicon-signal"></span> <strong>{{$ts->t("Klima")}} :</strong>
                             {{$arac->klima_tur_name}}
                         </label>
                     </div>
                     <div class="col-md-3">
                         @foreach ($genelService->afiyat($arac->a_id) as $fiyat)
-                        @foreach ($genelService->parabirim($fiyat->para_birim_id) as $parabirim)
+                        @foreach ($genelService->parabirim($fiyat['para_birim_id']) as $parabirim)
                         <div class="aracsec">
-                            <label class="fiyatlab">{{$fiyat->gun_baslangic}}-{{$fiyat->gun_bitis}} Gün Aralığı
-                                <span>{{$fiyat->fiyat}}-{{$parabirim->para_name}}</span></label>
+                            <label class="fiyatlab">{{$fiyat["gun_baslangic"]}}-{{$fiyat["gun_bitis"]}} {{$ts->t("Gün Aralığı")}}
+                             
+                            <span>{{$fiyat["fiyat"]}}-{{$parabirim->para_name}}</span></label>
 
                         </div>
 
@@ -107,7 +113,7 @@
 
                         @endforeach
                         <a onclick="hemenKirala({{json_encode($arac)}})"
-                            class="btn turanj full martoplow">Hemen Kiralayın</a>
+                            class="btn turanj full martoplow">{{$ts->t("Hemen Kiralayın")}}</a>
                     </div>
                 </div>
             </div>
@@ -124,18 +130,18 @@
                         <div class="col-md-12 mt-2">
                             <div class="form-group mb-0">
 
-                                <label for="" class="form-group mb-0"><b>Alış Yeri</b></label>
+                                <label for="" class="form-group mb-0"><b>{{$ts->t("Alış Yeri")}}</b></label>
                                 <div class="atbd-select-list d-flex col-md-12 alisDonus">
                                     <div class="col-md-12 mt-2">
                                         <div class="form-group mb-0">
 
                                         <div class="col-md-12">
-                                        <label for="" class="col-md-2 form-group mb-0 selectlabel"><b>İl</b></label>
+                                        <label for="" class="col-md-2 form-group mb-0 selectlabel"><b>{{$ts->t("İl")}}</b></label>
                                             <div class="col-md-10 atbd-select-list d-flex">
                                                 <div class="atbd-select " style="width: 100%;">
                                                     <select name="il" id='il' class="form-control"
                                                         onChange="ilceSec(event.target.value)" style="width: 100%;">
-                                                        <option value="">Seçiniz</option>
+                                                        <option value="">{{$ts->t("Seçiniz")}}</option>
                                                         @foreach ($genelService->il() as $key=>$il)
                                                         <option value="{{$il->il_id}}">{{$il->il_name}}</option>
                                                         @endforeach
@@ -160,7 +166,7 @@
                                         <div class="form-group mb-0">
 
                                             <div class="col-md-12">
-                                        <label for="" class="col-md-2 form-group mb-0 selectlabel"><b>İlçe</b></label>
+                                        <label for="" class="col-md-2 form-group mb-0 selectlabel"><b>{{$ts->t("İlçe")}}</b></label>
                                             <div class="col-md-10 atbd-select-list d-flex">
                                                 <div class="atbd-select " style="width: 100%;">
 
@@ -178,7 +184,7 @@
                                     <div class="col-md-12 mt2" id='alis_ofis'>
                                         <div class="form-group mb-0">
                                         <div class="col-md-12">
-                                        <label for="" class="col-md-2 form-group mb-0 selectlabel"><b>Ofis</b></label>
+                                        <label for="" class="col-md-2 form-group mb-0 selectlabel"><b>{{$ts->t("Ofis")}}</b></label>
                                             <div class="col-md-10 atbd-select-list d-flex">
                                                 <div class="atbd-select " style="width: 100%;">
 
@@ -200,10 +206,10 @@
                         <div class="col-md-12 mt12">
                             <div class="form-group mb-0">
 
-                                <label for="" class="form-group mb-0"><b>Alış Tarihi</b></label>
+                                <label for="" class="form-group mb-0"><b>{{$ts->t("Alış Tarihi")}}</b></label>
                                 <div class="atbd-select-list d-flex">
-                                    <input name="alis_tarihi" id="alis_tarihi" onchange="hesap()" type="date"
-                                        class="form-control form-control-default datePadding">
+                                    <input name="alis_tarihi" id="alis_tarihi"  type="date"
+                                        class="form-control form-control-default datePadding" />
                                 </div>
                             </div>
                         </div>
@@ -212,19 +218,19 @@
                         <div class="col-md-12 mt-2">
                             <div class="form-group mb-0">
 
-                                <label for="" class="form-group mb-0"><b>Dönüş Yeri</b></label>
+                                <label for="" class="form-group mb-0"><b>{{$ts->t("Dönüş Yeri")}}</b></label>
                                 <div class="atbd-select-list d-flex col-md-12 alisDonus">
                                     <div class="col-md-12 mt-2">
                                         <div class="form-group mb-0">
                                             <div class="col-md-12">
-                                        <label for="" class="col-md-2 form-group mb-0 selectlabel"><b>İl</b></label>
+                                        <label for="" class="col-md-2 form-group mb-0 selectlabel"><b>{{$ts->t("İl")}}</b></label>
                                             <div class="col-md-10 atbd-select-list d-flex">
                                                 <div class="atbd-select " style="width: 100%;">
 
-                                                    <select name="il" id='d_il' class="form-control"
+                                                    <select name="d_il" id='d_il' class="form-control"
                                                         onChange="ilceeSec(event.target.value)" style="width: 100%;">
 
-                                                        <option value="">Seçiniz</option>
+                                                        <option value="">{{$ts->t("Seçiniz")}}</option>
                                                         @foreach ($genelService->d_il() as $key=>$il)
                                                         <option value="{{$il->il_id}}">{{$il->il_name}}</option>
                                                         @endforeach
@@ -244,12 +250,12 @@
                                         <div class="form-group mb-0">
 
                                         <div class="col-md-12">
-                                        <label for="" class="col-md-2 form-group mb-0 selectlabel"><b>İlçe</b></label>
+                                        <label for="" class="col-md-2 form-group mb-0 selectlabel"><b>{{$ts->t("İlçe")}}</b></label>
                                             <div class="col-md-10 atbd-select-list d-flex">
                                                 <div class="atbd-select " style="width: 100%;">
 
 
-                                                    <select name="ilce" id="ilcee-select" class="form-control"
+                                                    <select name="d_ilce" id="ilcee-select" class="form-control"
                                                         onChange="ofissSec(event.target.value)" style="width: 100%;">
                                                     </select>
 
@@ -263,7 +269,7 @@
                                     <div class="col-md-12 mt2" id='donus_ofis'>
                                         <div class="form-group mb-0">
                                         <div class="col-md-12">
-                                        <label for="" class="col-md-2 form-group mb-0 selectlabel"><b>Ofis</b></label>
+                                        <label for="" class="col-md-2 form-group mb-0 selectlabel"><b>{{$ts->t("Ofis")}}</b></label>
                                             <div class="col-md-10 atbd-select-list d-flex">
                                                 <div class="atbd-select " style="width: 100%;">
 
@@ -286,9 +292,9 @@
                         <div class="col-md-12 mt12">
                         <div class="form-group mb-0">
                             
-                            <label for="" class="form-group mb-0"><b>Dönüş Tarihi</b></label>
+                            <label for="" class="form-group mb-0"><b>{{$ts->t("Dönüş Tarihi")}}</b></label>
                             
-                                        <input name="donus_tarihi" id="donus_tarihi" onchange="hesap()" type="date" class="form-control form-control-default datePadding" >
+                                        <input name="donus_tarihi" id="donus_tarihi"  type="date" class="form-control form-control-default datePadding" >
                             
                         </div>
                     </div>
@@ -296,18 +302,18 @@
 
                     </div>
 
-
-
-
-
-
-
                     <input class="btn yellow rezbig lowtxt" value="ARAÇLARI LİSTELE" onclick="aracsearch()"/>
                 
             </div>
         </div>
     </div>
 </div>
+</form>
+
+<form method="POST" id='arac_kirala' action="{{ route('kiralik.arac') }}" enctype="multipart/form-data">
+@csrf
+    <input name='deger' type="hidden" id='arac_deger' />
+</form>
 <style>
     .alisDonus{
         background: #dfdfdf;
@@ -461,6 +467,28 @@
                 console.error('Error:', error);
             });
     }
+    <?php
+    if(!empty($_POST))
+    {
+        $at=explode(' ',$_POST['alistarih'])[0];
+        $at=explode('/',$at);
+        $at=$at[2].'-'.$at[1].'-'.$at[0];
+
+        $don=explode(' ',$_POST['donustarih'])[0];
+        $don=explode('/',$don);
+        $don=$don[2].'-'.$don[1].'-'.$don[0];
+        ?>
+        $("#il").val('<?=$_POST['alisil']?>');
+        ilceSec('<?=$_POST['alisil']?>','<?=$_POST['alisilce']?>');
+        ofisSec('<?=$_POST['alisilce']?>','<?=$_POST['alisofis']?>');
+        $("#alis_tarihi").val('<?=$at?>');
+        $("#d_il").val('<?=$_POST['dil']?>');
+        ilceeSec('<?=$_POST['dilce']?>','<?=$_POST['dilce']?>');
+        ofissSec('<?=$_POST['dilce']?>','<?=$_POST['dofis']?>');
+        $("#donus_tarihi").val('<?=$don?>');
+        aracsearch();
+    <?php }?>
+    
 
  function  aracsearch()
  {
@@ -516,7 +544,8 @@
                         
              });
         }
-    
+
+var jsonString = JSON.stringify(arac);
         aracimlarim+='<div class="araclisting">'+
                 '<div class="row">'+
                     '<div class="col-md-4 ctext">'+
@@ -544,14 +573,13 @@
                     '</div>'+
                     '<div class="col-md-3">'+aracFiyat+
                         
-                    '<a class="btn turanj full martoplow" '+(arac.a_musait==1 && arac.kiralik!==1?'onclick="hemenKirala('+arac+')">Hemen Kiralayın':'">Müsait Değil')+'  </a>'+
+                    '<a class="btn turanj full martoplow" '+(arac.a_musait==1 && arac.kiralik!==1?"onclick='hemenKirala("+jsonString+")'>Hemen Kiralayın":'">Müsait Değil')+'  </a>'+
                     '</div>'+
                 '</div>'+
             '</div>';
 
     });
 
-    console.log(aracimlarim);
     $('#araclarim').html(aracimlarim);
   
  }
@@ -566,13 +594,32 @@
    var d_ilce= $("#ilcee-select").val();
    var d_ofis= $("#ofiss-select").val();
    var donus_tarihi= $("#donus_tarihi").val();
+   console.log(a_il);
     if(a_il==='' || a_ilce==='' || a_ofis==='' || alis_tarihi==='' || d_il==='' || d_ilce==='' || d_ofis==='' || donus_tarihi==='')
     {
         alert('alış yeri , dönüş yeri , alış tarihi ve dönüş tarihi alanlarını araçları listele formundan doldurunuz.');
         return 0;
     }
-    /// burada artık aracı kiralama sayfasına gidecek
+    else{
+         var deger = {}; 
 
+     deger.a_il = $("#il").val();
+     deger.a_ilce = $("#ilce-select").val();
+     deger.a_ofis = $("#ofis-select").val();
+     deger.alis_tarihi = $("#alis_tarihi").val();
+     deger.d_il = $("#d_il").val();
+     deger.d_ilce = $("#ilcee-select").val();
+     deger.d_ofis = $("#ofiss-select").val();
+     deger.donus_tarihi = $("#donus_tarihi").val();
+     deger.arac = arac;
+
+     $('#arac_deger').val(JSON.stringify(deger));
+     var form = document.getElementById("arac_kirala");
+    form.submit();
+
+    }
+   
+    
 
  }
 

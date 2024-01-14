@@ -1,6 +1,6 @@
 @extends('layout')
 @section('icerik')
-
+@inject('ts', 'App\Services\TranslateService')
 <form method="POST" action="{{ route('transfer.rezarvasyon') }}" enctype="multipart/form-data">
     @csrf
     <!-- Cross-Site Request Forgery (CSRF) koruması -->
@@ -19,16 +19,16 @@
             {{ Session::get('error') }}
         </div>
         @endif
-        <h1 class="bigtitle"><strong>Transfer Hizmetleri</strong></h1>
+        <h1 class="bigtitle"><strong>{{$ts->t("Transfer Hizmetleri")}}</strong></h1>
 
         <div class="col-md-12">
             <table class="table table-responsive table-striped table-bordered table-hover">
                 <tr>
-                    <th>Alış Yeri / Dönüş Yeri</th>
-                    <th>Mesafe</th>
-                    <th>Minimum Kişi</th>
-                    <th>Maximum Kişi</th>
-                    <th>Fiyat</th>
+                    <th> {{$ts->t("Alış Yeri")}}/{{$ts->t("Dönüş Yeri")}}</th>
+                    <th>{{$ts->t("Mesafe")}}</th>
+                    <th>{{$ts->t("Minimum Kişi")}}</th>
+                    <th>{{$ts->t("Maximum Kişi")}}</th>
+                    <th>{{$ts->t("Fiyat")}}</th>
 
                 </tr>
                 @foreach ($transferVerileri as $tra)
@@ -54,50 +54,50 @@
     </div>
 
     <div class="container marbot">
-        <h1 class="bigtitle nomartop"><strong>Transfer Bilgileri</strong></h1>
+        <h1 class="bigtitle nomartop"><strong>{{$ts->t("Transfer Bilgileri")}}</strong></h1>
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-6">
                     <input name="mus_id" id='mus_id' type="hidden" class="form-control form-control-default">
-                    <strong>Adınız</strong>
+                    <strong>{{$ts->t("Adınız")}}</strong>
                     <input type="text" class="form-control" name="mus_adi" required=""
-                        placeholder="Adınız Soyadınız..." />
+                        placeholder="{{$ts->t('Adınız Soyadınız')}}..." />
 
                     <br />
-                    <strong>Soyadınız</strong>
+                    <strong>{{$ts->t("Soyadınız")}}</strong>
                     <input type="text" class="form-control" name="mus_soyadi" required=""
-                        placeholder="Adınız Soyadınız..." />
+                        placeholder="{{$ts->t('Adınız Soyadınız')}}..." />
 
                     <br />
-                    <strong>Doğum Tarihiniz</strong>
+                    <strong>{{$ts->t("Doğum Tarihiniz")}}</strong>
                     <input type="text" class="form-control datepickyears" name="d_tarih" required=""
-                        placeholder="Doğum Tarihiniz..." />
+                        placeholder="{{$ts->t('Doğum Tarihiniz')}}..." />
 
                     <br />
-                    <strong>Transfer Notları</strong>
+                    <strong>{{$ts->t("Transfer Notları")}}</strong>
                     <textarea class="form-control" name="ucus_notlari" required=""
-                        placeholder="Transfer notlarını bu alana girin. Kaç kişi transfer edilecek, diğer bilgiler neler?"></textarea>
+                        placeholder="{{$ts->t('Transfer notlarını bu alana girin. Kaç kişi transfer edilecek, diğer bilgiler neler')}}?"></textarea>
                 </div>
                 <div class="col-md-6 mobpadtop">
-                    <strong>Cep Telefonunuz</strong>
+                    <strong>{{$ts->t("Cep Telefonunuz")}}</strong>
                     <input type="text" class="form-control phone" name="cep_tel" required=""
-                        placeholder="Cep Telefonunuz..." />
+                        placeholder="{{$ts->t('Cep Telefonunuz')}}..." />
 
                     <br />
-                    <strong>E-posta Adresiniz</strong>
+                    <strong>{{$ts->t("E-posta Adresiniz")}}</strong>
                     <input type="text" class="form-control" name="e_posta" required=""
-                        placeholder="E-posta Adresiniz..." />
+                        placeholder="{{$ts->t('E-posta Adresiniz')}}..." />
 
                     <br />
-                    <strong>Özel Notlar</strong>
+                    <strong>{{$ts->t("Özel Notlar")}}</strong>
                     <textarea class="form-control" name="ozel_notlar"
-                        placeholder="İsteğe bağlı olarak doldurulabilir..."></textarea>
+                        placeholder="{{$ts->t('İsteğe bağlı olarak doldurulabilir')}}..."></textarea>
                 </div>
             </div>
 
             <div class="sozlesmebox rounded" style="display: none;">
                 <label class="extcheck"><input type="checkbox" name="sozlesme" checked="checked" value="1"
-                        required="required" /> Hizmet şartlarını okudum, onayladım ve kabul ediyorum.</label>
+                        required="required" /> {{$ts->t("Hizmet şartlarını okudum, onayladım ve kabul ediyorum")}}.</label>
             </div>
         </div>
     </div>

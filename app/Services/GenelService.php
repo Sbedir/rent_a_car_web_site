@@ -119,6 +119,16 @@ class GenelService
         return  $data;
     }
 
+    public function ofisbilgi($ofis)
+    {
+        
+        $data = DB::select(DB::raw("
+            SELECT * FROM `arac_ofis` where ofis_id=".$ofis."
+        "));
+        return  $data;
+    }
+
+    
     public function ilce($il)
     {
         $data = DB::select(DB::raw("
@@ -187,12 +197,20 @@ class GenelService
     public function afiyat($a_id,$isGunluk=0)
     {
         $data = AracFiyat::where('arac_id', $a_id); 
+        if(!empty(session('pb')))
+        {
+            $data=$data->where('para_birim_id',session('pb'));
+        }
+        else{
+            $data=$data->where('para_birim_id',1);
+        }
+        
         if($isGunluk!=0)
         {
             $data=$data->where('gun_baslangic',1)->first();
         }
         else{
-            $data=$data->get();
+            $data=$data->get()->toArray();
         }
 
         return  $data;
@@ -269,6 +287,45 @@ class GenelService
            
         ));
 
+        return  $data;
+    }
+
+    public function ilbilgi($il)
+    {
+        $data = DB::select(DB::raw("
+            SELECT * FROM `il` where il_id=".$il."
+        "));
+
+        return  $data;
+    }
+
+    public function ilcebilgi($ilce)
+    {
+        $data = DB::select(DB::raw("
+            SELECT * FROM `ilce` where ilce_id=".$ilce
+        ));
+
+        return  $data;
+    }
+
+    public function rezucret($pb)
+    {
+        $data = DB::select(DB::raw("
+            SELECT * FROM `rezervasyon_extralari` where para_birim_id=".$pb
+        ));
+
+        return  $data;
+    }
+    public function ismusteri($email)
+    {
+        $data = DB::select(DB::raw("
+            SELECT * FROM `musteri` where e_posta='".$email."'"));
+        return  $data;
+    }
+    public function isuye($email)
+    {
+        $data = DB::select(DB::raw("
+            SELECT * FROM `uyeler` where e_posta='".$email."'"));
         return  $data;
     }
     
